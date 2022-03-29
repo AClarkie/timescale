@@ -17,8 +17,12 @@ services:
     ports:
       - 127.0.0.1:5432:5432
     volumes:
-      - ./database/data:/var/lib/postgresql/data
-      - ./database/csvs/cpu_usage.csv:/var/lib/postgresql/csvs/cpu_usage.csv
+      - ./data:/var/lib/postgresql/data
+      - ./csvs/cpu_usage.csv:/var/lib/postgresql/csvs/cpu_usage.csv
     <<: *logging
+
+  wait:
+    image: dokku/wait
+    
 
 

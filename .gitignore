@@ -1,2 +1,4 @@
 database/data/*
 vendor/*
+coverage.out
+app
