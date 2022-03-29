@@ -13,7 +13,7 @@
 
 2. Build the application
 
-    Run the following makefile target to generate a binary name `app`
+    Run the following makefile target to generate a binary named `app`
     * `make build`
 
 ## Running the application
