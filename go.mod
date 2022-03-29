@@ -3,6 +3,7 @@ module github.com/AClarkie/timescale
 go 1.17
 
 require (
+	github.com/DATA-DOG/go-sqlmock v1.5.0
 	github.com/blendle/zapdriver v1.3.1
 	github.com/gocarina/gocsv v0.0.0-20220310154401-d4df709ca055
 	github.com/lib/pq v1.10.4

@@ -3,16 +3,13 @@
 .PHONY: help build modules test build_docker test_docker clean lint push kube_yaml
 
 DOCKER          ?= docker
-DOCKER_TAG      := test
+DOCKER_TAG      := latest-pg14
 GO              ?= go
 MAKEFILE_PATH   := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 APP				:= app
 
 help: ## Displays this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
-
-dep-dev:
-	echo "Would run dep-dev"
 
 setup:
 	$(GO) mod init github.com/AClarkie/timescale
@@ -35,11 +32,18 @@ test: modules ## Run the tests
 	## Run tests in current dir and subdirectory and disable test caching
 	$(GO) test -coverprofile=coverage.out -mod=vendor ./... -count=1 -v -coverprofile=coverage.out
 
-clean: ## Clean the object files, build, test caches along with the built binary
-	$(GO) clean -cache -testcache
-	rm -rf $(APP)
+start-database:
+	make docker-database
+	make run-database
 
-docker: ## Build the docker image for timescale
+stop-database:
+	docker-compose -f database/docker-compose.yaml down
+
+docker-database: ## Build the docker image for timescale
 	docker build \
 		-t aclarkie/timescale:$(DOCKER_TAG) \
-		.
+		-f database/Dockerfile .
+
+run-database:
+	docker-compose -f database/docker-compose.yaml up -d
+	docker-compose -f database/docker-compose.yaml run wait -c timescale:5432

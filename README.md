@@ -1,28 +1,14 @@
-# 
+# Timescale exercise
 
-PGPASSWORD=password psql -U postgres -h localhost -p 5432 -d homework
+### Prerequisites
 
-# The query logic 
-host_000008,2017-01-01 08:59:22,2017-01-01 09:59:22
+1. Install Docker, if you don't already have it. For packages and instructions, see the [Docker installation documentation](https://docs.docker.com/get-docker/)
+### Setup
 
-# Finished query
-SELECT
-    time_bucket('1 minute', ts) AS minute,
-    host,
-    max(usage) AS max_usage,
-    min(usage) AS min_usage
-  FROM cpu_usage
-  WHERE ts >= '2017-01-01 08:59:22' AND ts < '2017-01-01 09:59:22'
-  GROUP BY minute, host
-  ORDER BY minute DESC;
+1. Setup the database
+  Run the following makefile target:
+  * `make start-database`
 
-SELECT
-    time_bucket('1 minute', ts) AS minute,
-    host,
-    max(usage) AS max_usage,
-    min(usage) AS min_usage
-  FROM cpu_usage
-  WHERE ts >= '2017-01-01 08:59:22' AND ts < '2017-01-01 09:59:22'
-  AND host = 'host_000017'
-  GROUP BY minute, host
-  ORDER BY minute DESC;
+  This will build the database docker container and start the database, exposing port 5432 locally.
+
+2. 
