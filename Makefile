@@ -29,7 +29,6 @@ build: ## Builds the app
 
 test: modules ## Run the tests
 	echo "To run tests"
-	## Run tests in current dir and subdirectory and disable test caching
 	$(GO) test -coverprofile=coverage.out -mod=vendor ./... -count=1 -v -coverprofile=coverage.out
 
 start-database:

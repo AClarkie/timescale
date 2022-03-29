@@ -21,7 +21,7 @@ func ProcessAndDisplayResults(results chan *Result) {
 	fmt.Println("=======")
 	fmt.Printf("Number of queries run:                    %d \n", totalQueries)
 	fmt.Printf("Total processing time across all queries: %v \n", totalTime)
-	fmt.Printf("Average query time:                       %v \n", totalTime/time.Duration(totalQueries))
+	fmt.Printf("The average query time:                   %v \n", totalTime/time.Duration(totalQueries))
 	fmt.Printf("The minimum query time:                   %v \n", sortedResults[0])
 	fmt.Printf("The maximum query time:                   %v \n", sortedResults[totalQueries-1])
 	fmt.Printf("The median query time:                    %v \n", calculateMedianTime(sortedResults))

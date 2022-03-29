@@ -27,9 +27,9 @@ var (
 )
 
 func init() {
-	flag.StringVar(&queryParams, "queryParams", "query_params.csv", "Path to a query_params.csv")
+	flag.StringVar(&queryParams, "queryParams", "query_params.csv", "Path to the input csv")
 	flag.BoolVar(&verbose, "verbose", false, "Enable verbose logging")
-	flag.IntVar(&goroutineCount, "goroutineCount", 10, "The number of goroutines to create")
+	flag.IntVar(&goroutineCount, "goroutineCount", 2, "The number of goroutines to use")
 	flag.StringVar(&dbHost, "dbHost", "localhost", "The database host")
 	flag.StringVar(&dbName, "dbName", "homework", "The database name")
 	flag.StringVar(&dbUser, "dbUser", "postgres", "The database user")
